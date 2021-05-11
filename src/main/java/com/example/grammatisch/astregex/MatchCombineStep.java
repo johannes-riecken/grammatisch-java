@@ -1,16 +1,19 @@
 package com.example.grammatisch.astregex;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public record MatchCombineStep(String combineRuleName, int depth) implements RegexStep {
-    static Tree unfoldAnnotatedRegexTree(int n) {
+    static @Nullable Tree unfoldAnnotatedRegexTree(int n) {
         var bottomLeft = new ArrayList<Integer>();
-        for (int i = 0; i < n; i++) {
+        for (var i = 0; i < n; i++) {
             bottomLeft.add(0);
         }
         var res = new Tree(bottomLeft, null, null);
-        for (int i = 0; i < n; i++) {
+        for (var i = 0; i < n; i++) {
             var val = res.val();
             val = val.subList(0, -2);
             var right = new ArrayList<>(val);
@@ -19,15 +22,14 @@ public record MatchCombineStep(String combineRuleName, int depth) implements Reg
         }
         return res;
     }
-    static String indexOfR(List<Integer> indexes) {
+    static @NotNull String indexOfR(@NotNull List<Integer> indexes) {
         var buf = new StringBuilder();
         buf.append("$^R->[");
-        int i = 0;
+        var i = 0;
         for (var x : indexes) {
             buf.append(x);
-            if (i != indexes.size() - 1)
+            if (i++ != indexes.size() - 1)
                 buf.append("][");
-            i++;
         }
         buf.append("]");
         return buf.toString();
@@ -45,7 +47,7 @@ public record MatchCombineStep(String combineRuleName, int depth) implements Reg
         i2Param.add(endIdx);
         var i2 = indexOfR(i2Param);
         var children = new StringBuilder();
-        int i = 0;
+        var i = 0;
         for (var x : arr.subList(1, arr.size())) {
             children.append(indexOfR(x));
             if (i < arr.size() - 2) {

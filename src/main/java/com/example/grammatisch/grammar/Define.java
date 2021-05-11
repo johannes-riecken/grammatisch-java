@@ -1,12 +1,13 @@
 package com.example.grammatisch.grammar;
 
 import com.example.grammatisch.astregex.RegexStep;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
 public record Define(String defineName, List<RegexStep> regexSteps) {
-    public String toString() {
-        if (regexSteps.size() == 0) {
+    public @NotNull String toString() {
+        if (regexSteps.isEmpty()) {
             throw new AssertionError("Define must contain at least one RegexStep");
         }
         var buf = new StringBuilder();

@@ -2,16 +2,16 @@ package com.example.grammatisch.grammar;
 
 
 import com.example.grammatisch.astregex.ASTRegex;
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public record Grammar(List<RuleSpec> ruleSpecs) {
-    public ASTRegex ToRegex() {
+    public @NotNull ASTRegex toRegex() {
         var  defines = new ArrayList<Define>(ruleSpecs.size());
-        int i = 0;
         for (var x : ruleSpecs) {
-            defines.add(x.ToRegex());
+            defines.add(x.toRegex());
         }
         return new ASTRegex(defines);
     }

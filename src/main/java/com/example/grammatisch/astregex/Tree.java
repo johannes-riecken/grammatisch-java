@@ -1,10 +1,12 @@
 package com.example.grammatisch.astregex;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public record Tree(List<Integer> val, Tree left, Tree right) {
-    List<List<Integer>> indicesList() {
+    @NotNull List<List<Integer>> indicesList() {
         if (left == null && right == null) {
             return List.of(val);
         }
