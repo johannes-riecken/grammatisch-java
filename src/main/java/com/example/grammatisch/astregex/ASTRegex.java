@@ -6,6 +6,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
 public record ASTRegex(List<Define> defines) {
+    @Override
     public @NotNull String toString() {
         if (defines.isEmpty()) {
             throw new AssertionError("ASTRegex must contain at least one Define");

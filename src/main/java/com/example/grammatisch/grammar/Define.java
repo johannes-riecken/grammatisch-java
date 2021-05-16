@@ -6,6 +6,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
 public record Define(String defineName, List<RegexStep> regexSteps) {
+    @Override
     public @NotNull String toString() {
         if (regexSteps.isEmpty()) {
             throw new AssertionError("Define must contain at least one RegexStep");

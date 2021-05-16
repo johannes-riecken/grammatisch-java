@@ -35,6 +35,7 @@ public record MatchCombineStep(String combineRuleName, int depth) implements Reg
         return buf.toString();
     }
 
+    @Override
     public String toString() {
         var beginIdx = 1;
         var endIdx = 2;

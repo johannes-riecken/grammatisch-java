@@ -6,7 +6,7 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
-record RuleSpec(String ruleRef, List<Alternative> alternatives) {
+public record RuleSpec(String ruleRef, List<Alternative> alternatives) {
     public @NotNull Define toRegex() {
         var ret = new Define(ruleRef, new ArrayList<>(alternatives.get(0).elements().size()));
         for (var x : alternatives.get(0).elements()) {
