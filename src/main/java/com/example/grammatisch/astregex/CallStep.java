@@ -1,6 +1,8 @@
 package com.example.grammatisch.astregex;
 
-public record CallStep(String callee) implements RegexStep {
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+public record CallStep(@JsonProperty("callee") String callee) implements RegexStep {
     public String toString() {
         return String.format("(?&%s)", callee);
     }

@@ -1,6 +1,8 @@
 package com.example.grammatisch.astregex;
 
-public record MatchStep(String matchString) implements RegexStep {
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+public record MatchStep(@JsonProperty("matchString") String matchString) implements RegexStep {
     @Override
     public String toString() {
         return String.format("(?: %s )", matchString);

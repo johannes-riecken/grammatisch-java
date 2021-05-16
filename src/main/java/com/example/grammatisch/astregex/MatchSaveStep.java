@@ -1,4 +1,6 @@
 package com.example.grammatisch.astregex;
 
-public record MatchSaveStep(String saveRuleName) implements RegexStep {
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+public record MatchSaveStep(@JsonProperty("saveRuleName") String saveRuleName) implements RegexStep {
 }

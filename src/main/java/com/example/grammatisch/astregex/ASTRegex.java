@@ -1,11 +1,12 @@
 package com.example.grammatisch.astregex;
 
 import com.example.grammatisch.grammar.Define;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-public record ASTRegex(List<Define> defines) {
+public record ASTRegex(@JsonProperty("defines") List<Define> defines) {
     @Override
     public @NotNull String toString() {
         if (defines.isEmpty()) {
