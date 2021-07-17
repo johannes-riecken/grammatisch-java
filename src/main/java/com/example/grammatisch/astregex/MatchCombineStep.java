@@ -2,13 +2,12 @@ package com.example.grammatisch.astregex;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public record MatchCombineStep(@JsonProperty("combineRuleName") String combineRuleName, @JsonProperty("depth") int depth) implements RegexStep {
-    static @Nullable Tree unfoldAnnotatedRegexTree(int n) {
+    static @NotNull Tree unfoldAnnotatedRegexTree(int n) {
         var bottomLeft = new ArrayList<Integer>();
         for (var i = 0; i < n; i++) {
             bottomLeft.add(0);
@@ -43,10 +42,10 @@ public record MatchCombineStep(@JsonProperty("combineRuleName") String combineRu
         var endIdx = 2;
         var arr = unfoldAnnotatedRegexTree(depth).indicesList();
         var i0 = indexOfR(arr.get(0));
-        var i1Param = new ArrayList<Integer>(arr.get(1));
+        var i1Param = new ArrayList<>(arr.get(1));
         i1Param.add(beginIdx);
         var i1 = indexOfR(i1Param);
-        var i2Param = new ArrayList<Integer>(arr.get(arr.size() - 1));
+        var i2Param = new ArrayList<>(arr.get(arr.size() - 1));
         i2Param.add(endIdx);
         var i2 = indexOfR(i2Param);
         var children = new StringBuilder();
