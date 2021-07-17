@@ -47,6 +47,7 @@ class GrammarTest {
             ));
             var got = args.toRegex();
             assertEquals(want, got);
+            assertEquals(want.toString(), got.toString());
         }
     }
 }

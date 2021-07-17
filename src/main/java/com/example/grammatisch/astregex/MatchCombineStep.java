@@ -13,13 +13,14 @@ public record MatchCombineStep(@JsonProperty("combineRuleName") String combineRu
         for (var i = 0; i < n; i++) {
             bottomLeft.add(0);
         }
+        List<Integer> right = new ArrayList<>(bottomLeft);
+        if (!right.isEmpty())
+            right.set(right.size() - 1, 1);
         var res = new Tree(bottomLeft, null, null);
+
         for (var i = 0; i < n; i++) {
-            var val = res.val();
-            val = val.subList(0, -2);
-            var right = new ArrayList<>(val);
-            right.add(1);
-            res = new Tree(val, res, new Tree(right, null, null));
+            res = new Tree(null, res, new Tree(right, null, null));
+            right = right.subList(1, right.size());
         }
         return res;
     }
@@ -42,10 +43,10 @@ public record MatchCombineStep(@JsonProperty("combineRuleName") String combineRu
         var endIdx = 2;
         var arr = unfoldAnnotatedRegexTree(depth).indicesList();
         var i0 = indexOfR(arr.get(0));
-        var i1Param = arr.get(1);
+        var i1Param = new ArrayList<Integer>(arr.get(1));
         i1Param.add(beginIdx);
         var i1 = indexOfR(i1Param);
-        var i2Param = arr.get(arr.size() - 1);
+        var i2Param = new ArrayList<Integer>(arr.get(arr.size() - 1));
         i2Param.add(endIdx);
         var i2 = indexOfR(i2Param);
         var children = new StringBuilder();
@@ -57,6 +58,6 @@ public record MatchCombineStep(@JsonProperty("combineRuleName") String combineRu
             }
             i++;
         }
-        return String.format("(?{ [%s, ['%s', %s, %s, [%s]]] })", i0, combineRuleName, i1, i2, children.toString());
+        return String.format("(?{ [%s, ['%s', %s, %s, [%s]]] })", i0, combineRuleName, i1, i2, children);
     }
 }
