@@ -51,6 +51,8 @@ jobs:
         # Prefix the list here with "+" to use these queries and those in the config file.
         # queries: ./path/to/local/query, your-org/your-repo/queries@main
     - name: Setup Java JDK
+      env:
+        ACTIONS_ALLOW_UNSECURE_COMMANDS: true
       uses: actions/setup-java@v1.3.0
       with:
         java-version: 16
