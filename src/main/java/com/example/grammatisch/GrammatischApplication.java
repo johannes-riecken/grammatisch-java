@@ -71,8 +71,14 @@ public class GrammatischApplication {
 
 	// take a grammar, send back a regex
 	@GetMapping("/hello")
-	public Point hello() {
-		var args = new Grammar(List.of(new RuleSpec("Foo", List.of(new Alternative(List.of(new Quoted("'bar'")))))));
+	public Point hello(
+			@RequestParam(name="ruleRef", required = false, defaultValue = "Foo") String ruleRef
+			, @RequestParam(name="element", required = false) List<Element> elements
+	) {
+		if (elements == null) {
+			elements = List.of(new Quoted("'bar'"));
+		}
+		var args = new Grammar(List.of(new RuleSpec(ruleRef, List.of(new Alternative(elements)))));
 		var got = args.toRegex();
 //		return new Point(List.of(42, 7));
 		return new Point(new Inner());
