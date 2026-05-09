@@ -13,7 +13,7 @@ public record ASTRegex(@JsonProperty("defines") List<Define> defines) {
             throw new AssertionError("ASTRegex must contain at least one Define");
         }
         var buf = new StringBuilder();
-        buf.append(String.format("\\A (?&%s) \\z%n(?(DEFINE)%n", defines.get(0).defineName()));
+        buf.append("\\A (?&%s) \\z%n(?(DEFINE)%n".formatted(defines.get(0).defineName()));
         for (var x : defines) {
             buf.append(x.toString());
             buf.append('\n');

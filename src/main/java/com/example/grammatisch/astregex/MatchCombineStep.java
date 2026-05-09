@@ -57,6 +57,6 @@ public record MatchCombineStep(@JsonProperty("combineRuleName") String combineRu
             }
             i++;
         }
-        return String.format("(?{ [%s, ['%s', %s, %s, [%s]]] })", i0, combineRuleName, i1, i2, children);
+        return "(?{ [%s, ['%s', %s, %s, [%s]]] })".formatted(i0, combineRuleName, i1, i2, children);
     }
 }
